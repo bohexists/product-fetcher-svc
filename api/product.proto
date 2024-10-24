@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/bohexists/product-fetcher-svc/api/proto;proto";
+
+message FetchRequest {
+  string url = 1;
+}
+
+message FetchResponse {
+  bool success = 1;
+}
+
+message ListRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string sort_field = 3;
+  bool sort_asc = 4;
+}
+
+message Product {
+  string name = 1;
+  float price = 2;
+  int32 updates = 3;
+}
+
+message ListResponse {
+  repeated Product products = 1;
+}
+
+service ProductService {
+  rpc Fetch (FetchRequest) returns (FetchResponse);
+  rpc List (ListRequest) returns (ListResponse);
+}
