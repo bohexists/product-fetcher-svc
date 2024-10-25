@@ -2,12 +2,14 @@ package services
 
 import (
 	"context"
-	"github.com/bohexists/product-fetcher-svc/api/proto"
+	"github.com/bohexists/product-fetcher-svc/api"
 	"github.com/bohexists/product-fetcher-svc/internal/adapters/mongo"
+	"log"
 )
 
 type ProductService struct {
 	repo *mongo.ProductRepository
+	proto.UnimplementedProductServiceServer
 }
 
 func NewProductService(mongoClient *mongo.MongoClient) *ProductService {
