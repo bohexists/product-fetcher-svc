@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/bohexists/product-fetcher-svc/api/proto"
+	"github.com/bohexists/product-fetcher-svc/api"
 	"github.com/bohexists/product-fetcher-svc/internal/adapters/mongo"
 	"github.com/bohexists/product-fetcher-svc/internal/config"
 	"github.com/bohexists/product-fetcher-svc/internal/services"
