@@ -2,8 +2,8 @@ package services
 
 import (
 	"context"
-	"github.com/bohexists/product-fetcher-svc/api"
 	"github.com/bohexists/product-fetcher-svc/internal/adapters/mongo"
+	"github.com/bohexists/product-fetcher-svc/internal/proto"
 	"log"
 )
 
