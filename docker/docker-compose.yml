@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - product-network
+
+  product-fetcher-svc:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: product-fetcher-svc
+    ports:
+      - "50051:50051"
+    environment:
+      MONGO_URI: mongodb://root:example@mongo:27017
+    depends_on:
+      - mongo
+    networks:
+      - product-network
+
+  product-list-svc:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: product-list-svc
+    ports:
+      - "50052:50052"
+    environment:
+      FETCHER_SERVICE_ADDR: product-fetcher-svc:50051
+    depends_on:
+      - product-fetcher-svc
+    networks:
+      - product-network
+
+networks:
+  product-network:
+    driver: bridge
